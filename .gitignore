@@ -1,0 +1,28 @@
+# Server Logs
+server/logs
+server/*.log
+server/npm-debug.log*
+server/yarn-debug.log*
+server/yarn-error.log*
+
+# Client Logs
+client/logs
+client/*.log
+client/npm-debug.log*
+client/yarn-debug.log*
+client/yarn-error.log*
+
+# Server
+server/node_modules
+server/dist
+server/dist-ssr
+server/yarn.lock
+server/*.local
+
+# Client
+client/node_modules
+client/dist
+client/dist-ssr
+client/*.local
+client/yarn.lock
+
