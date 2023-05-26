@@ -7,13 +7,13 @@ export const TaskListItemContainer = styled('li', {
   justifyContent: 'space-between',
   alignItems: 'center',
   backgroundColor: '$black300',
-  border: '1.5px solid transparent',
+  border: '2px solid transparent',
   borderRadius: '6px',
   '&:not(:last-child)': {
     marginBottom: '12px'
   },
   '&:hover': {
-    border: '1.5px solid $black200',
+    border: '2px solid $black200',
   },
 })
 

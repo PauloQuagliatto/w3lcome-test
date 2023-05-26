@@ -33,10 +33,10 @@ export function TaskListItem({ task, handleDataChange, handleEditClick, handleDe
           onChange={(e) => handleChange(e.target.checked)}
         />
         <EditButton onClick={handleEditClick}>
-          <Pen />
+          <Pen size={24} />
         </EditButton>
         <DeleteButton onClick={handleDeleteClick}>
-          <Trash />
+          <Trash size={24} />
         </DeleteButton>
       </ButtonsContainer>
     </TaskListItemContainer>

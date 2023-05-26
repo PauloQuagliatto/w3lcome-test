@@ -1,11 +1,12 @@
 import { useEffect, useState } from 'react'
 
+import { useTasks } from './hooks/useTasks'
+
 import { TaskFormModal } from './components/TaskFormModal'
 import { NewTaskButton } from './components/NewTaskButton'
 import { TasksList } from './components/TasksList'
 import { TaskListItem } from './components/TaskListItem'
 
-import { api } from './services/api'
 
 import { globalCss } from './styles'
 import { Container } from './styles/defaults/Container'
@@ -34,22 +35,26 @@ const css = globalCss({
 export function App() {
   css()
   const [isFormOpen, setIsFormOpen] = useState(false)
-  const [isLoading, setIsLoading] = useState(false)
   const [selectedTask, setSelectedTask] = useState<Task | undefined>(undefined)
-  const [tasks, setTasks] = useState<Task[]>([])
+  const {
+    tasks,
+    getTasks,
+    handleDataChange,
+    handleDeleteTask,
+    isLoading,
+    setIsLoading
+  } = useTasks()
 
-  async function getTasks() {
-    setIsLoading(true)
-    const res = await api.get('tasks')
-    setTasks(res.data.tasks)
-    setTimeout(() => {
-      setIsLoading(false)
-    }, 1500)
-  }
+
 
   useEffect(() => {
     getTasks()
   }, [])
+
+  async function handleFormAction(task: string | Task) {
+    await handleDataChange(task)
+    setIsFormOpen(false)
+  }
 
   function openNewTaskForm() {
     setSelectedTask(undefined)
@@ -61,32 +66,6 @@ export function App() {
     setIsFormOpen(true)
   }
 
-  async function handleDataChange(task: string | Task) {
-    if (typeof task === 'string') {
-      await api.post('tasks', {
-        titulo: task
-      })
-    } else {
-      await api.patch('tasks', {
-        body: {
-          task
-        },
-        params: { id: task.id }
-      })
-
-    }
-
-    await getTasks()
-    setIsFormOpen(false)
-  }
-
-  async function handleDeleteTask(id: number) {
-    await api.delete('tasks', {
-      params: { id }
-    })
-
-    getTasks()
-  }
 
   return (
     <>
@@ -95,7 +74,7 @@ export function App() {
         task={selectedTask}
         isOpen={isFormOpen}
         setIsOpen={setIsFormOpen}
-        handleDataChange={handleDataChange}
+        handleDataChange={handleFormAction}
       />
       <Container>
         <NewTaskButton onClick={openNewTaskForm} />
