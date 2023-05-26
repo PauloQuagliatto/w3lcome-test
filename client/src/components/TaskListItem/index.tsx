@@ -1,24 +1,44 @@
-import { Pen } from 'phosphor-react'
-import { DialogTrigger } from '../../styles/defaults/DialogTrigger'
-import { TaskListItemContainer } from './styles'
+import { Pen, Trash } from 'phosphor-react'
+
+import {
+  ButtonsContainer,
+  CheckButton,
+  DeleteButton,
+  EditButton,
+  TaskListItemContainer
+} from './styles'
+import { Task } from '../../types'
 
 type TaskListItemProps = {
-  titulo: string
-  concluido: boolean
+  task: Task
+  handleDataChange: (task: Task) => void
+  handleEditClick: () => void
+  handleDeleteClick: () => void
 }
 
-export function TaskListItem({ titulo, concluido }: TaskListItemProps) {
+export function TaskListItem({ task, handleDataChange, handleEditClick, handleDeleteClick }: TaskListItemProps) {
+  const { titulo, concluida } = task
+
+  function handleChange(isFinished: boolean) {
+    handleDataChange({ id: task.id, titulo, concluida: isFinished })
+  }
+
   return (
     <TaskListItemContainer>
       <h2>{titulo}</h2>
-      <div>
-        <input type='checkbox' checked={concluido} />
-        <DialogTrigger asChild>
-          <button>
-            <Pen />
-          </button>
-        </DialogTrigger>
-      </div>
+      <ButtonsContainer>
+        <CheckButton
+          type='checkbox'
+          checked={concluida}
+          onChange={(e) => handleChange(e.target.checked)}
+        />
+        <EditButton onClick={handleEditClick}>
+          <Pen />
+        </EditButton>
+        <DeleteButton onClick={handleDeleteClick}>
+          <Trash />
+        </DeleteButton>
+      </ButtonsContainer>
     </TaskListItemContainer>
   )
 }

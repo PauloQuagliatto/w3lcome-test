@@ -14,9 +14,9 @@ export function pushToTasks(newTask: Task) {
   tasks.push(newTask)
 }
 
-export function updateTasks(newTask: Task) {
+export function updateTasks(id: number, newTask: Task) {
   tasks = tasks.map((task) => (
-    task.id === newTask.id ? newTask : task
+    task.id === id ? newTask : task
   ))
 
   return tasks

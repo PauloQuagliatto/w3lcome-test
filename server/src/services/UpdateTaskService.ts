@@ -2,8 +2,12 @@ import { updateTasks } from '../tasks'
 import { Task } from '../types'
 
 export class UpdateTaskService {
-  execute(task: Task) {
-    const tasks = updateTasks(task)
+  execute(id: string, task: Task) {
+    const numberId = Number(id)
+
+    if (isNaN(numberId)) throw new Error('Not Possible')
+
+    const tasks = updateTasks(numberId, task)
 
     return tasks
   }

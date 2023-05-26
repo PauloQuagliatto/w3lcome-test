@@ -58,26 +58,44 @@ export const DialogCloseButton = styled('button', {
 
 export const Form = styled('form', {
   width: '100%',
+  marginTop: '16px',
   display: 'flex',
   flexDirection: 'column',
   justifyContent: 'center',
   alignItems: 'flex-start',
-  gap: '8px'
+  gap: '8px',
+  'button': {
+    width: '100%',
+    padding: '8px',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '$green300',
+    border: 'none',
+    borderRadius: '6px',
+    color: '$black200',
+    fontSize: 16
+  }
 })
 
 export const Fieldset = styled('fieldset', {
   width: '100%',
+  display: 'flex',
+  flexDirection: 'column',
+  alignItems: 'flex-start',
+  gap: '8px',
   border: 'none'
 })
 
 export const Input = styled('input', {
   width: '100%',
-  padding: '4px 8px',
+  padding: '12px 4px',
   backgroundColor: '$black200',
   border: '1px solid transparent',
   borderRadius: '6px',
   '&:focus': {
     outline: 'none',
     border: '1px solid $yellow300'
-  }
+  },
+  fontSize: '16px'
 })

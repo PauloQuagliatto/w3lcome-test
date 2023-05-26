@@ -14,7 +14,7 @@ const router = Router()
 
 router.get('/tasks', getTasksController.handle)
 router.post('/tasks', createTaskController.handle)
-router.patch('/tasks', updateTaskController.handle)
-router.delete('/tasks', deleteTaskController.handle)
+router.patch('/tasks/:id', updateTaskController.handle)
+router.delete('/tasks/:id', deleteTaskController.handle)
 
 export { router }

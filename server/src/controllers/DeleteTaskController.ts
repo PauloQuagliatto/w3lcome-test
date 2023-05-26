@@ -4,7 +4,7 @@ import { DeleteTaskService } from '../services/DeleteTaskService'
 
 export class DeleteTaskController {
   handle(req: Request, res: Response) {
-    const { id } = req.body
+    const { id } = req.params
 
     const deleteTaskService = new DeleteTaskService()
 
